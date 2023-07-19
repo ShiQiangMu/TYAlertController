@@ -14,8 +14,14 @@
 @property (nonatomic, weak) UITapGestureRecognizer *singleTap;
 @end
 
+/*
+大部分情况下用[UIApplication sharedApplication].keyWindow是可以的，
+但是如果取keywindow前系统有弹过窗（UIAlertView）并且没消失，
+此时取到的keywindow会是UIAlertControllerShimPresenterWindow，而不是UIWindow，
+所以是建议这样获取[[[UIApplication sharedApplication] delegate] window]
+*/
 //current window
-#define kCurrentWindow [UIApplication sharedApplication].keyWindow
+#define kCurrentWindow [[[UIApplication sharedApplication] delegate] window]
 
 @implementation TYShowAlertView
 
